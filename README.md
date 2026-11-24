@@ -63,6 +63,32 @@ The full credits and licenses are in the Source section of [SKILL.md](SKILL.md).
 
 ## Installation
 
+The skill follows the [Agent Skills](https://agentskills.io) format, so it runs in Claude Code, OpenCode, Pi, Google Antigravity, and other agents that read `SKILL.md` folders.
+
+1. Install the skill with the [`skills` command-line tool](https://github.com/vercel-labs/skills), which needs Node.js:
+
+   ```bash
+   npx skills add jmanteau/tech-writer -g -a claude-code -a opencode -a pi -a antigravity
+   ```
+
+   Leave out `-a` to pick the agents from a list. The tool keeps one copy of the skill and links each agent's folder to it. If links break in your setup, add `--copy`. To update the skill later, run `npx skills update -g`.
+
+2. Install Vale. On macOS, run `brew install vale`. On Windows, run `winget install -e --id errata-ai.Vale`.
+3. Download the Vale packages. Run `vale sync` in the `vale` folder of the installed skill. That folder is `~/.agents/skills/tech-writer/vale` on macOS and Linux, and `%USERPROFILE%\.agents\skills\tech-writer\vale` on Windows. If the tool reports a skill as `copied`, or you used `--copy`, run it in each agent's folder.
+
+The tool installs into these global folders:
+
+| Agent | `-a` value | Global folder |
+|---|---|---|
+| Claude Code | `claude-code` | `~/.claude/skills/` |
+| OpenCode | `opencode` | `~/.agents/skills/` |
+| Pi | `pi` | `~/.agents/skills/` |
+| Google Antigravity | `antigravity` | `~/.gemini/config/skills/` |
+
+For an agent the tool doesn't support, copy this repository's folder into the agent's skills folder as `tech-writer`, then do steps 2 and 3.
+
+## Development
+
 1. Clone this repository to `~/DevProjects/tech-writer`, then link it into Claude Code's skills folder:
 
    ```bash
@@ -72,6 +98,14 @@ The full credits and licenses are in the Source section of [SKILL.md](SKILL.md).
 2. Install Vale with `brew install vale`.
 3. Download the Vale packages with `make vale-sync`.
 4. To run the tests, run `make py-setup && make test`.
+
+On Windows, which has no `make`, run the same steps with `uv`:
+
+```powershell
+uv sync --group dev
+cd vale; vale sync; cd ..
+uv run pytest
+```
 
 ## License
 
