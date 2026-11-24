@@ -89,7 +89,7 @@ CHECKS = {check for check, _ in CASES}
 
 def _mapped_checks() -> set[str]:
     """Vale checks named in the mapping table of audit-checklist.md (rows like `| a, b | H5 | exact |`)."""
-    text = CHECKLIST.read_text().split("| Vale check | ID | Kind |", 1)[1].split("\n\n", 1)[0]
+    text = CHECKLIST.read_text(encoding="utf-8").split("| Vale check | ID | Kind |", 1)[1].split("\n\n", 1)[0]
     rows = [line.split("|")[1] for line in text.splitlines()[2:]]
     return {check.strip() for row in rows for check in row.split(",")}
 
@@ -103,6 +103,7 @@ def _alerts(fixture: Path) -> list[dict[str, object]]:
         ["vale", "--config", str(VALE_DIR / ".vale.ini"), "--output=JSON", str(fixture)],
         capture_output=True,
         text=True,
+        encoding="utf-8",
         timeout=60,
         cwd=ROOT,
     )
@@ -112,14 +113,14 @@ def _alerts(fixture: Path) -> list[dict[str, object]]:
 
 def _prose_line(sentence: str) -> int:
     """Line of the first occurrence of sentence, which is always outside the code block."""
-    for number, line in enumerate(TELLS.read_text().splitlines(), start=1):
+    for number, line in enumerate(TELLS.read_text(encoding="utf-8").splitlines(), start=1):
         if sentence in line:
             return number
     raise AssertionError(f"{sentence!r} not in {TELLS}")
 
 
 def _code_block_range() -> range:
-    fences = [n for n, line in enumerate(TELLS.read_text().splitlines(), start=1) if line.startswith("```")]
+    fences = [n for n, line in enumerate(TELLS.read_text(encoding="utf-8").splitlines(), start=1) if line.startswith("```")]
     assert len(fences) == 2
     return range(fences[0], fences[1] + 1)
 
@@ -154,14 +155,14 @@ def test_every_claudism_line_gets_a_mapped_alert() -> None:
     hit = {a["Line"] for a in _alerts(CLAUDISMS) if a["Check"] in mapped}
     prose = [
         (number, line)
-        for number, line in enumerate(CLAUDISMS.read_text().splitlines(), start=1)
+        for number, line in enumerate(CLAUDISMS.read_text(encoding="utf-8").splitlines(), start=1)
         if line.strip() and not line.startswith("#")
     ]
     assert [line for number, line in prose if number not in hit] == []
 
 
 def test_readme_after_section_is_clean() -> None:
-    lines = README.read_text().splitlines()
+    lines = README.read_text(encoding="utf-8").splitlines()
     start = lines.index("## After") + 1
     end = lines.index("## Changes") + 1
     mapped = _mapped_checks()
@@ -172,7 +173,7 @@ def test_readme_after_section_is_clean() -> None:
 @pytest.mark.parametrize(("sentences", "fires"), [(10, True), (9, False)])
 def test_sentence_average_needs_ten_long_sentences(tmp_path: Path, sentences: int, fires: bool) -> None:
     doc = tmp_path / "average.md"
-    doc.write_text(" ".join(["The job " + "reads " * 19 + "rows." for _ in range(sentences)]) + "\n")
+    doc.write_text(" ".join(["The job " + "reads " * 19 + "rows." for _ in range(sentences)]) + "\n", encoding="utf-8")
     assert any(a["Check"] == "TechWriter.SentenceAverage" for a in _alerts(doc)) is fires
 
 
@@ -186,11 +187,12 @@ def test_iso_text_audit_parity(tmp_path: Path) -> None:
         ["bun", str(script), str(TELLS), "--json", str(out)],
         capture_output=True,
         text=True,
+        encoding="utf-8",
         timeout=60,
         cwd=ROOT,
     )
     assert result.returncode == 0, result.stderr
-    violations = [v for f in json.loads(out.read_text())["files"].values() for v in f["violations"]]
+    violations = [v for f in json.loads(out.read_text(encoding="utf-8"))["files"].values() for v in f["violations"]]
     assert {v["rule"] for v in violations} - ISO_UNPORTED <= ISO_TO_VALE.keys()
     alerts = {(a["Line"], a["Check"]) for a in _alerts(TELLS)}
     missed = [

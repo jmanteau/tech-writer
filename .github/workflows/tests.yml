@@ -1,0 +1,68 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    name: pytest (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
+
+      - name: Install Vale (Linux)
+        if: runner.os == 'Linux'
+        env:
+          VALE_VERSION: 3.28.1
+        run: |
+          curl -fsSL --retry 3 "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" | tar -xz -C "$RUNNER_TEMP" vale
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+
+      - name: Install Vale (Windows)
+        if: runner.os == 'Windows'
+        run: choco install vale --no-progress -y
+
+      - name: Install the dev dependencies
+        run: uv sync --group dev
+
+      - name: Download the Vale packages
+        working-directory: vale
+        run: vale sync
+
+      - name: Lint and type-check
+        if: runner.os == 'Linux'
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+          uv run mypy tests
+
+      # A missing Vale makes pytest skip the Vale tests, which would pass the job.
+      - name: Run the tests
+        run: |
+          uv run pytest -rs | tee pytest.log
+          if grep -q "vale or its packages are missing" pytest.log; then
+            echo "::error::pytest skipped the Vale tests"
+            exit 1
+          fi
