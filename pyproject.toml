@@ -1,0 +1,42 @@
+[project]
+name = "tech-writer"
+version = "0.1.0"
+description = "Claude Code skill for plain-language technical documentation"
+requires-python = ">=3.13"
+dependencies = []
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+default = true
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+    "ruff>=0.12",
+    "mypy>=1.16",
+]
+
+[tool.ruff]
+line-length = 128
+indent-width = 4
+# efficiency: the Markdown code blocks are writing examples (wrapped at 80 on purpose), not code to format.
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = false
+warn_return_any = true
+warn_unused_configs = true

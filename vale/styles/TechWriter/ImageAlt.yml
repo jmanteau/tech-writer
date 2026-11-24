@@ -1,0 +1,38 @@
+# S10: an image with empty alt text. ISO rule image-alt; a title of "decorative" marks an image that carries no meaning.
+# Skips fenced and inline code.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: script
+message: "Image has no alt text; describe what it shows (S10)."
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  fence := false
+  offset := 0
+  prev := ""
+  prev_offset := 0
+  for raw in text.split(scope, "\n") {
+    line := raw
+    if text.re_match(`^\s*(\x60{3}|~{3})`, line) {
+      fence = !fence
+    } else if !fence {
+      spans := text.re_find(`\x60[^\x60]*\x60`, line, -1)
+      if spans {
+        for s in spans {
+          line = line[:s[0].begin] + text.repeat(" ", s[0].end - s[0].begin) + line[s[0].end:]
+        }
+      }
+      found := text.re_find(`!\[\s*\]\([^)\s][^)]*\)`, line, -1)
+      if found {
+        for m in found {
+          if !text.re_match(`(?i)\s+(?:"decorative"|'decorative'|\(decorative\))\s*\)$`, m[0].text) {
+            matches = append(matches, {begin: offset + m[0].begin, end: offset + m[0].end})
+          }
+        }
+      }
+    }
+    prev = line
+    prev_offset = offset
+    offset += len(raw) + 1
+  }

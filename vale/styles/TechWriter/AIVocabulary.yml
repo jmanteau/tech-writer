@@ -1,0 +1,20 @@
+# H8: AI vocabulary that ai-tells.OverusedVocabulary misses. Case-sensitive.
+extends: existence
+message: "Replace the AI-typical word '%s' with a plain one (H8)."
+level: warning
+tokens:
+  - 'Delves?'
+  - 'Crucial'
+  - 'Pivotal'
+  - 'Showcase[sd]?'
+  - 'Testament'
+  - 'garner(s|ed)?'
+  - 'boasts'
+  - 'exemplif(y|ies)'
+  - 'leverages'
+  - 'tapestry'
+  - 'diverse array'
+  - 'valuable insights'
+  - '[Ll]oad[- ]bearing'
+  - '[Qq]uietly'
+  - '[Hh]onestly'

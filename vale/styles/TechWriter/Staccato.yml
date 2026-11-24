@@ -1,0 +1,8 @@
+# H26: three or more short sentences in a row ("Short sentence. Shorter one. Pivot.").
+# Candidate: a short sequence of real steps or facts is fine.
+extends: existence
+message: "Check '%s': staccato rhythm; join the clipped sentences into one (H26)."
+level: warning
+nonword: true
+tokens:
+  - "\\b(?:[A-Za-z']+[ ,]+){0,4}[A-Za-z']+[.?!] (?:[A-Za-z']+[ ,]+){0,4}[A-Za-z']+[.?!] (?:[A-Za-z']+[ ,]+){0,4}[A-Za-z']+[.?!]"

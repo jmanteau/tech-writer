@@ -1,0 +1,13 @@
+# H14: source disclaimers.
+extends: existence
+message: "Check '%s': a source disclaimer; cite the source or drop the claim (H14)."
+level: warning
+ignorecase: true
+tokens:
+  - 'as of my last (knowledge |training )?update'
+  - 'up to my last training update'
+  - 'knowledge cutoff'
+  - 'based on (the )?available information'
+  - 'in the provided (sources|search results)'
+  - 'not widely documented'
+  - 'does not by itself establish'

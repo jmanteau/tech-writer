@@ -1,0 +1,9 @@
+# I14: at most 3 heading levels below the title; '####' is the deepest. ISO rule heading-depth (maximumHeadingLevel 4).
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: existence
+message: "Heading level 5 or 6; restructure so '####' is the deepest (I14)."
+level: warning
+scope: [heading.h5, heading.h6]
+nonword: true
+tokens:
+  - '.+'

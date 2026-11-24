@@ -1,0 +1,13 @@
+# H19: notability claims without a named source.
+extends: existence
+message: "Check '%s': name the source instead of a vague notability claim (H19)."
+level: warning
+ignorecase: true
+tokens:
+  - 'independent coverage'
+  - '(regional|national|local) media outlets'
+  - 'trade publications'
+  - '(maintains|has) an? (active|strong) (social media|digital|online) presence'
+  - 'several sources (say|report|suggest|indicate)'
+  - 'described in scholarship'
+  - 'modern researchers (treat|argue|describe)'

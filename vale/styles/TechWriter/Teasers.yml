@@ -1,0 +1,11 @@
+# H3: teasers that stage the point instead of making it. Candidate: read the sentence.
+extends: existence
+message: "Check '%s': a teaser before the point; state the point (H3)."
+level: warning
+ignorecase: true
+tokens:
+  - "here's the thing"
+  - "the part that's (really )?interesting"
+  - "nobody's (saying|talking about)"
+  - 'let me be direct'
+  - 'worth sitting with'

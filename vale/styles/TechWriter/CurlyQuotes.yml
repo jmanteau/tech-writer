@@ -1,0 +1,7 @@
+# H21: curly quotes and apostrophes. Straight quotes only.
+extends: existence
+message: "Use straight quotes instead of '%s' (H21)."
+level: warning
+nonword: true
+raw:
+  - '[“”‘’]'

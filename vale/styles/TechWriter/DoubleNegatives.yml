@@ -1,0 +1,22 @@
+# I7 [EN]: double negatives the reader has to unpick. ISO rule double-negative (DOUBLE_NEGATIVES).
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: existence
+message: "Double negative '%s'; state it positively (I7)."
+level: warning
+ignorecase: true
+tokens:
+  - not unlike
+  - not uncommon
+  - not unusual
+  - not unreasonable
+  - not unimportant
+  - not insignificant
+  - not inconsiderable
+  - not without
+  - never without
+  - cannot fail to
+  - not impossible
+  - not unknown
+  - no fewer than no
+  - not unhelpful
+  - not unclear

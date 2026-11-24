@@ -1,0 +1,8 @@
+# S2 candidate: a heading over 12 words. Word-count part of ISO rule heading-style (headingWordLimit); the trailing period is Google.HeadingPunctuation.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: occurrence
+message: "Heading over 12 words; shorten it to the noun phrase or task (S2)."
+level: suggestion
+scope: heading
+max: 12
+token: '[^\s]+'

@@ -1,0 +1,42 @@
+# S6: a table header row with an empty cell. ISO rule table-header: a row above a |---| divider, outer pipes optional.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: script
+message: "Table header has an empty column name; name every column (S6)."
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  fence := false
+  offset := 0
+  prev := ""
+  prev_offset := 0
+  for raw in text.split(scope, "\n") {
+    line := raw
+    if text.re_match(`^\s*(\x60{3}|~{3})`, line) {
+      fence = !fence
+    } else if !fence {
+      spans := text.re_find(`\x60[^\x60]*\x60`, line, -1)
+      if spans {
+        for s in spans {
+          line = line[:s[0].begin] + text.repeat(" ", s[0].end - s[0].begin) + line[s[0].end:]
+        }
+      }
+      divider := text.trim_space(line)
+      header := text.trim_space(prev)
+      if text.contains(header, "|") && text.contains(divider, "-") && text.re_match(`^\|?[\s:|-]+\|?$`, divider) {
+        if text.has_prefix(header, "|") {
+          header = text.trim_suffix(text.trim_prefix(header, "|"), "|")
+        }
+        for cell in text.split(header, "|") {
+          if text.trim_space(text.re_replace(`[*_~]`, cell, "")) == "" {
+            matches = append(matches, {begin: prev_offset, end: prev_offset + len(prev)})
+            break
+          }
+        }
+      }
+    }
+    prev = line
+    prev_offset = offset
+    offset += len(raw) + 1
+  }

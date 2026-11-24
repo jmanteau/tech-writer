@@ -1,0 +1,36 @@
+# S9: link text that names no destination: here, click here, this link, read more, an empty label, or a bare URL.
+# ISO rule link-text (UNINFORMATIVE_LINK). Inline links only; skips fenced and inline code.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: script
+message: "Link text names no destination; say where it goes (S9)."
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  fence := false
+  offset := 0
+  prev := ""
+  prev_offset := 0
+  for raw in text.split(scope, "\n") {
+    line := raw
+    if text.re_match(`^\s*(\x60{3}|~{3})`, line) {
+      fence = !fence
+    } else if !fence {
+      spans := text.re_find(`\x60[^\x60]*\x60`, line, -1)
+      if spans {
+        for s in spans {
+          line = line[:s[0].begin] + text.repeat(" ", s[0].end - s[0].begin) + line[s[0].end:]
+        }
+      }
+      found := text.re_find(`(?i)(?:^|[^!\]])(\[(?:\s*|click here|here|this|link|this link|read more|more|more info|details|see more|learn more|go|page|website|download|<?(?:https?://|www\.)[^\]]*)\]\([^)\s][^)]*\))`, line, -1)
+      if found {
+        for m in found {
+          matches = append(matches, {begin: offset + m[1].begin, end: offset + m[1].end})
+        }
+      }
+    }
+    prev = line
+    prev_offset = offset
+    offset += len(raw) + 1
+  }

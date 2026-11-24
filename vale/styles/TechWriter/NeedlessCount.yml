@@ -1,0 +1,9 @@
+# H25: counts the reader can see or does not need ("act on four points:" before a list of four, "all twenty-nine decisions").
+extends: existence
+message: "Count the reader can see or does not need: '%s'. Drop the number unless it is the fact (H25)."
+level: suggestion
+ignorecase: true
+nonword: true
+tokens:
+  - '\b(?:(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)(?:-(?:one|two|three|four|five|six|seven|eight|nine))?|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|\d+)\s+(?:[a-z-]+\s+)?[a-z]+s:'
+  - '\ball\s+(?:(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)(?:-(?:one|two|three|four|five|six|seven|eight|nine))?|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|\d+)\s+[a-z]+s\b'

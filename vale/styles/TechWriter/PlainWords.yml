@@ -1,0 +1,39 @@
+# I3 [EN]: legalese and formal words with an everyday equivalent. ISO rules legalese (LEGALESE) and complex-word (COMPLEX_WORDS).
+# The legalese replacements are this skill's own; the ISO audit only bans the terms.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: substitution
+message: "Use '%s' instead of '%s' (I3)."
+level: warning
+ignorecase: true
+swap:
+  shall: must
+  hereby: (delete it)
+  hereinafter: from now on
+  wherefore: why
+  heretofore: until now
+  aforesaid: this
+  utilise: use
+  utilize: use
+  utilising: using
+  utilizing: using
+  commence: start
+  commences: starts
+  commenced: started
+  ascertain: find
+  facilitate: help
+  facilitates: helps
+  endeavour: try
+  endeavor: try
+  terminate: end
+  terminates: ends
+  aforementioned: this
+  notwithstanding: despite
+  henceforth: now
+  thereafter: then
+  whereby: how
+  herein: here
+  thereof: its
+  therein: inside
+  expedite: hasten
+  disseminate: share
+  remuneration: pay

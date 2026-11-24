@@ -1,0 +1,19 @@
+# H7: inflated significance.
+extends: existence
+message: "Check '%s': inflated significance; state the concrete fact (H7)."
+level: warning
+ignorecase: true
+tokens:
+  - 'highlights (its|the) (significance|importance)'
+  - 'reflects (a )?broader'
+  - '(marking|marks|represents) a shift'
+  - 'key turning point'
+  - 'focal point'
+  - 'is a reminder of'
+  - 'shaped (conversations|discussions|debate) about'
+  - 'prompted broader reflection'
+  - 'contributed to (wider|broader) discussions'
+  - 'generated debate about'
+  - 'despite its success'
+  - 'faces (several|many|numerous) challenges'
+  - 'future outlook'

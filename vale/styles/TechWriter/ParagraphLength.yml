@@ -1,0 +1,9 @@
+# I2 candidate: a paragraph or list item of more than 5 sentences (4 in a chat reply). ISO rule paragraph-length.
+# Counts sentence ends, so an abbreviation such as "e.g. " counts as one; read the paragraph before splitting it.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: occurrence
+message: "Paragraph of more than 5 sentences; split it (I2)."
+level: suggestion
+scope: [paragraph, list]
+max: 5
+token: '[.?!](?:\s|$)'

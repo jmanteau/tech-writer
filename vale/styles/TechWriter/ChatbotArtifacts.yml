@@ -1,0 +1,20 @@
+# H10: chatbot artifacts. Remove leftover tool markup, placeholders and tracking parameters.
+extends: existence
+message: "Remove the chatbot artifact '%s' (H10)."
+level: warning
+nonword: true
+tokens:
+  - 'contentReference\[oaicite:\d+\]'
+  - 'utm_source=(chatgpt\.com|openai|copilot\.com)'
+  - 'referrer=grok\.com'
+  - '↩'
+  - '\[Your [A-Z]\w+\]'
+  - '\[Article Title \d+\]'
+  - '\b(INSERT|PASTE)_[A-Z_]+_HERE\b'
+  - 'INSERT_SOURCE_URL_\d+'
+  - '\b\d{4}-XX-XX\b'
+  - 'example\.com/source\d+'
+  - '(?i)\bas an AI language model\b'
+  - '(?i)\bas a large language model\b'
+  - "(?i)\\byou're not (crazy|alone|wrong)\\b"
+  - "(?i)\\byou're just early\\b"

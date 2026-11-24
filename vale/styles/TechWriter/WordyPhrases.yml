@@ -1,0 +1,47 @@
+# I3 [EN]: wordy phrases and doublets with a shorter exact equivalent. ISO rules wordy-phrase (WORDY_PHRASES) and doublet (DOUBLETS).
+# The legal-register doublets "cease and desist" and "terms and conditions" have no shorter form and are left out.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: substitution
+message: "Use '%s' instead of '%s' (I3)."
+level: warning
+ignorecase: true
+swap:
+  in spite of the fact that: although
+  notwithstanding the fact that: although
+  due to the fact that: because
+  at this moment in time: now
+  at this point in time: now
+  in the event that: if
+  in the near future: soon
+  for the purpose of: to
+  in the absence of: without
+  a large number of: many
+  a small number of: a few
+  it is possible that: may
+  take into consideration: consider
+  has the ability to: can
+  in order to: to
+  with regard to: about
+  with reference to: about
+  in relation to: about
+  the majority of: most
+  is able to: can
+  make a decision: decide
+  provide assistance: help
+  prior to: before
+  subsequent to: after
+  null and void: void
+  each and every: each
+  first and foremost: first
+  true and correct: "true"
+  full and complete: complete
+  revert back: revert
+  repeat again: repeat
+  free gift: gift
+  past history: history
+  future plans: plans
+  end result: result
+  unexpected surprise: surprise
+  advance planning: planning
+  close proximity: close
+  general consensus: consensus

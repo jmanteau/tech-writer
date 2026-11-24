@@ -1,0 +1,8 @@
+# I1 candidate: an average over 20 words per sentence across a document of 10 or more sentences.
+# ISO rule sentence-average (sentenceAverageLimit, averageMinimumSentences). Reported on line 1.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: metric
+message: "Average sentence length is %s words; aim for 20 or fewer (I1)."
+level: suggestion
+formula: "sentences >= 10 ? words / sentences : 0.0"
+condition: "> 20"

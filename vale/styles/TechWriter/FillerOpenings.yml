@@ -1,0 +1,11 @@
+# R6 candidate: a sentence that opens with filler instead of the answer. ISO rule filler-opening (FILLER_OPENINGS).
+# The ISO audit checks only the first sentence of a document; Vale cannot limit a rule to it, so this checks every sentence.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: existence
+message: "Opens with filler '%s'; start with the answer (R6)."
+level: suggestion
+scope: sentence
+ignorecase: true
+nonword: true
+tokens:
+  - "^(?:certainly|sure|of course|absolutely|great question|good question|happy to help|i'd be happy to|i would be happy to|let me|as an ai|here is the summary|here's the summary|in this document we will|this document will)\\b(?![-'])(?![.,;:!?]?\\s*not\\b)"

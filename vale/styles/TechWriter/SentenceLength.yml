@@ -1,0 +1,8 @@
+# I1: a sentence over 30 words. ISO rule sentence-length (ENGINE_THRESHOLDS.sentenceWordLimit).
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: occurrence
+message: "Sentence over 30 words; split it (I1)."
+level: warning
+scope: sentence
+max: 30
+token: '[^\s]+'

@@ -1,0 +1,39 @@
+# S3 candidate: a heading more than one level below the heading before it ("#" then "###"). ISO rule heading-skip.
+# ATX headings only; skips fenced code.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: script
+message: "Heading skips a level; add the missing level or promote this one (S3)."
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  fence := false
+  offset := 0
+  prev := ""
+  prev_offset := 0
+  last := 0
+  for raw in text.split(scope, "\n") {
+    line := raw
+    if text.re_match(`^\s*(\x60{3}|~{3})`, line) {
+      fence = !fence
+    } else if !fence {
+      spans := text.re_find(`\x60[^\x60]*\x60`, line, -1)
+      if spans {
+        for s in spans {
+          line = line[:s[0].begin] + text.repeat(" ", s[0].end - s[0].begin) + line[s[0].end:]
+        }
+      }
+      h := text.re_find(`^ {0,3}(#{1,6})\s+\S`, line, 1)
+      if h {
+        level := len(h[0][1].text)
+        if last > 0 && level > last + 1 {
+          matches = append(matches, {begin: offset, end: offset + len(raw)})
+        }
+        last = level
+      }
+    }
+    prev = line
+    prev_offset = offset
+    offset += len(raw) + 1
+  }

@@ -1,0 +1,8 @@
+# H1: "X isn't the problem. Y is." and "isn't just X. It's Y." Candidate: read the sentence.
+extends: existence
+message: "Check '%s': a contrast against a claim nobody made; state the claim (H1)."
+level: warning
+nonword: true
+tokens:
+  - "n't the (problem|point|issue|bottleneck)\\. [^.]{1,40} (is|was)\\."
+  - "n't just [^.]+\\. It's"

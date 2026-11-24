@@ -1,0 +1,10 @@
+# S5 candidate: three or more ordinal words in one paragraph ("first, second, and third"); use a list.
+# ISO rule prose-enumeration (enumerationMinimumRanks). Counts ordinals, not distinct ranks; "third-party" is not one.
+# Ported from the ISO 24495 text audit of GaZmagik/iso-24495 v0.7.0 (MIT, Gareth Williams).
+extends: occurrence
+message: "Enumeration in prose; use a numbered or bulleted list (S5)."
+level: suggestion
+scope: paragraph
+ignorecase: true
+max: 2
+token: '\b(?:first|firstly|second|secondly|third|thirdly|fourth|fourthly|fifth|fifthly|sixth|sixthly)\b(?!-)'
