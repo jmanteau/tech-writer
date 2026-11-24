@@ -301,7 +301,7 @@ Vale cannot check every R, A, N, I, and H rule, P11, S2 heading shape, S6 table 
 
 ### The skill's machine pass
 
-The skill ships its own configuration at `~/.claude/skills/tech-writer/vale/.vale.ini`, used only when the project has no `.vale.ini`. It adds the vale-ai-tells package and one custom style, `TechWriter`. Run `make vale-sync` in the skill's repo to download the packages, which are not committed.
+The skill ships its own configuration, the `vale/.vale.ini` in the skill's folder, used only when the project has no `.vale.ini`. It adds the vale-ai-tells package and one custom style, `TechWriter`. Run `make vale-sync` in the skill's repo to download the packages, which are not committed.
 
 The `TechWriter` AI-tell rules cover H1 (`Reversal`), H3 (`Teasers`), H5 (`DashSubstitutes`), H7 (`Significance`), H8 (`AIVocabulary`), H10 (`ChatbotArtifacts`), H14 (`SourceDisclaimers`), H19 (`NotabilityClaims`), H21 (`CurlyQuotes`), H25 (`NeedlessCount`), and H26 (`Staccato`). Its other rules port the mechanical checks of the ISO 24495 text audit (GaZmagik/iso-24495 v0.7.0) to Vale. For the I rules they cover I1 (`SentenceLength`, `SentenceAverage`), I2 (`ParagraphLength`), I3 (`PlainWords`, `WordyPhrases`), I7 (`DoubleNegatives`), and I14 (`HeadingDepth`). For the R and S rules they cover R6 (`FillerOpenings`), S2 (`HeadingLength`), S3 (`HeadingSkip`), S5 (`ProseEnumeration`), S6 (`TableHeader`), S9 (`LinkText`), and S10 (`ImageAlt`).
 
