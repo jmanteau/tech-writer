@@ -38,6 +38,8 @@ Read the guide: [Configure the proxy](https://example.com).
 
 First, open the file.
 
+3 of 5 tests failed. The job retries 3 times on version 2.10.1.
+
 ## Section
 
 ### Subsection

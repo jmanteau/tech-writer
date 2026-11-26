@@ -26,6 +26,10 @@ The board must act on four points:
 
 Chapter 21 lists all twenty-nine decisions.
 
+316 of 1,088 instances lack SSM data.
+
+S3 stores 4,784.9 TiB.
+
 The change quietly broke the build.
 
 The parser is load-bearing for the release.
@@ -110,6 +114,10 @@ Showcase the options in the menu.
 The board must act on four points:
 
 Chapter 21 lists all twenty-nine decisions.
+
+316 of 1,088 instances lack SSM data.
+
+S3 stores 4,784.9 TiB.
 
 The change quietly broke the build.
 

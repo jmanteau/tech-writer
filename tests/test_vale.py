@@ -56,6 +56,8 @@ CASES = [
     ("TechWriter.AIVocabulary", "Showcase the options"),
     ("TechWriter.NeedlessCount", "The board must act on"),
     ("TechWriter.NeedlessCount", "Chapter 21 lists"),
+    ("TechWriter.FalsePrecision", "316 of 1,088 instances"),
+    ("TechWriter.FalsePrecision", "4,784.9 TiB"),
     ("TechWriter.AIVocabulary", "quietly broke"),
     ("TechWriter.AIVocabulary", "load-bearing for"),
     ("TechWriter.AIVocabulary", "And honestly"),

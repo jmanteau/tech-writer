@@ -1,0 +1,10 @@
+# S14: false precision in titles and claims ("316 of 1,088 instances", "4,784.9 TiB"). Round to a share or 2 significant figures.
+extends: existence
+message: "False precision: '%s'. Give a share or round to 2 significant figures unless the exact number is the fact (S14)."
+level: suggestion
+nonword: true
+tokens:
+  - '(?<![\d.,])\d[\d,]* of (?:the )?\d{1,3}(?:,\d{3})+(?![\d.,]*\d)'
+  - '(?<![\d.,])\d+ of (?:the )?[1-9]\d{2,}(?![\d.]*\d)'
+  - '(?<![\d.,])\d{1,3}(?:,\d{3})+\.\d+(?![\d.]*\d)'
+  - '(?<![\d.,])\d{4,}\.\d+(?![\d.]*\d)'
