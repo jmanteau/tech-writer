@@ -8,15 +8,16 @@
 6. [Link text (S9)](#link-text-s9)
 7. [Images and alt text (S10)](#images-and-alt-text-s10)
 8. [Numbers, dates, and units (S11)](#numbers-dates-and-units-s11-en)
-9. [Text formatting summary (S12)](#text-formatting-summary-s12)
-10. [Bold lead-ins (S13)](#bold-lead-ins-s13)
-11. [Accessibility for any reader (I8)](#accessibility-for-any-reader-i8)
-12. [Diagram text alternative (I12)](#diagram-text-alternative-i12)
-13. [Heading depth (I14)](#heading-depth-i14)
-14. [Table of contents (I15)](#table-of-contents-i15)
-15. [Worked example](#worked-example)
+9. [Rounded figures (S14)](#rounded-figures-s14)
+10. [Text formatting summary (S12)](#text-formatting-summary-s12)
+11. [Bold lead-ins (S13)](#bold-lead-ins-s13)
+12. [Accessibility for any reader (I8)](#accessibility-for-any-reader-i8)
+13. [Diagram text alternative (I12)](#diagram-text-alternative-i12)
+14. [Heading depth (I14)](#heading-depth-i14)
+15. [Table of contents (I15)](#table-of-contents-i15)
+16. [Worked example](#worked-example)
 
-This file deepens SKILL.md, Structure (headings, lists, tables, notices). It gives the full rule text, more before/after pairs, and the numbers, dates, and text-formatting rules that the skill summarizes. It owns **S1 to S13, I8, I12, I14, and I15**. Code-font specifics, placeholders, and UI-element bold live in `procedures-and-code.md` (P6, P8, P5). Paragraph rules live in `document-types.md` (R6).
+This file deepens SKILL.md, Structure (headings, lists, tables, notices). It gives the full rule text, more before/after pairs, and the numbers, dates, and text-formatting rules that the skill summarizes. It owns **S1 to S14, I8, I12, I14, and I15**. Code-font specifics, placeholders, and UI-element bold live in `procedures-and-code.md` (P6, P8, P5). Paragraph rules live in `document-types.md` (R6).
 
 ## Headings (S1, S2, S3)
 
@@ -296,6 +297,25 @@ Units get a space and the standard symbol, never a spelled-out or invented abbre
 - "This feature requires SDK version two." becomes "This feature requires SDK version 2."
 
 Source: numbers, dates-times
+
+## Rounded figures (S14)
+
+Round a figure to the precision the reader needs to act on it. A title or a headline claim states a share or a rounded magnitude, never an exact count of things the reader does not count one by one. The precision depends on what the figure says:
+
+- **Shares over counts:** when the point is a proportion, give the share rounded to the nearest 5%, with "about". Write "About 40% of the applications have a P1 blocker", not "25 applications have a P1 blocker".
+- **Rounded magnitudes:** when the size itself is the point, round to 2 significant figures. Write "about 4,800 TiB", not "4,784.9 TiB".
+- **Matching precision:** a chart label or a table cell can stay exact, but drop false precision there too. Use whole units for values of 10 and over, with no decimal on thousands.
+- **Exact facts:** limits, thresholds, versions, dates, and small counts that define the scope or the decision stay exact: "61 applications in 160 accounts", "7 applications in one move group", "retries 3 times". A count that is the fact is also the H25 exception (SKILL.md, AI tells).
+- **Computed, not typed:** when the figure comes from data, compute the rounded value from the source, so it follows the data when the data changes.
+
+Before and after:
+
+- "S3 stores 4,785 of the 5,759 TiB the pack sizes" becomes "S3 stores about 85% of the data the pack sizes."
+- "316 of 1,088 instances lack SSM data" becomes "About 30% of the EC2 instances lack SSM data."
+
+Test: if the reader would act the same way on a number 5% higher or lower, round it.
+
+Source: user rule for this skill (S14)
 
 ## Text formatting summary (S12)
 

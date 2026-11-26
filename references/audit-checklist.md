@@ -29,7 +29,7 @@ Source: skill rule (SKILL.md, section 9).
 
 ## Rule table
 
-The table has 106 rules in nine groups. Groups R, V, W, S, P, A, and N come from wondelai's `technical-documentation` skill, which adapts Google's guide. Group I holds the ISO 24495-1, 24495-3, and 24495-5 proxies (ISO 24495-5 is an unpublished working draft, so its rows are provisional), and group H holds the AI tells. The `(inferred)` and `(convention)` labels mark rows that are not verbatim Google guidance; keep the label when you cite them. Source slugs are pages under `developers.google.com/style` unless another origin is named.
+The table has 107 rules in nine groups. Groups R, V, W, S, P, A, and N come from wondelai's `technical-documentation` skill, which adapts Google's guide. Group I holds the ISO 24495-1, 24495-3, and 24495-5 proxies (ISO 24495-5 is an unpublished working draft, so its rows are provisional), and group H holds the AI tells. The `(inferred)` and `(convention)` labels mark rows that are not verbatim Google guidance; keep the label when you cite them. Source slugs are pages under `developers.google.com/style` unless another origin is named.
 
 **R: reader and document type**
 
@@ -87,6 +87,7 @@ The table has 106 rules in nine groups. Groups R, V, W, S, P, A, and N come from
 | S11 | Unambiguous dates; numbers zero to nine spelled out, 10 and up as numerals | Low | `[EN]` | dates-times, numbers | structure-and-formatting.md |
 | S12 | Bold for UI elements, code font for code, italics sparingly for terms; one meaning per visual device | Low | none | text-formatting; ISO 24495-5 skill, rule 5 (draft) | structure-and-formatting.md |
 | S13 | Explanatory bullets open with 2 to 4 bold lead-in words; no other bold in prose except UI names | Low | none | ISO 24495-1 skill (house convention) | structure-and-formatting.md |
+| S14 | Titles and headline claims give shares to the nearest 5% with "about" or magnitudes to 2 significant figures, computed from the data; no false precision in tables; limits, thresholds, versions, dates, and scope counts stay exact | Medium | none | user rule for this skill | structure-and-formatting.md |
 
 **P: procedures and code**
 
@@ -268,7 +269,7 @@ Source: developers.google.com/style/about for precedence; the file list and grep
 
 ## Non-English documents
 
-Structure and content rules apply unchanged: all of R, S1 to S10, S12, S13, P1 to P11, A1 to A6, N1 to N6, I1, I2, and I4 to I18. The same holds for H1 to H7, H9 to H17, H19, H21 to H23, and H25 to H27, plus V1, V2, V3, V6, V7, V9 and W1, W3, W6. A Japanese how-to still needs an audience statement, numbered steps, and verified flags.
+Structure and content rules apply unchanged: all of R, S1 to S10, S12 to S14, P1 to P11, A1 to A6, N1 to N6, I1, I2, and I4 to I18. The same holds for H1 to H7, H9 to H17, H19, H21 to H23, and H25 to H27, plus V1, V2, V3, V6, V7, V9 and W1, W3, W6. A Japanese how-to still needs an audience statement, numbered steps, and verified flags.
 
 Skip the `[EN]` rules (V8, W4, W5, W7, W8, S11, I3, H8, H18, H20, H24), which encode English spelling, word choice, and punctuation. V4, V5, V10, W2, S1, S2, and A7 sit in between: the intent transfers, but the exact test does not.
 
@@ -303,7 +304,7 @@ Vale cannot check every R, A, N, I, and H rule, P11, S2 heading shape, S6 table 
 
 The skill ships its own configuration, the `vale/.vale.ini` in the skill's folder, used only when the project has no `.vale.ini`. It adds the vale-ai-tells package and one custom style, `TechWriter`. Run `make vale-sync` in the skill's repo to download the packages, which are not committed.
 
-The `TechWriter` AI-tell rules cover H1 (`Reversal`), H3 (`Teasers`), H5 (`DashSubstitutes`), H7 (`Significance`), H8 (`AIVocabulary`), H10 (`ChatbotArtifacts`), H14 (`SourceDisclaimers`), H19 (`NotabilityClaims`), H21 (`CurlyQuotes`), H25 (`NeedlessCount`), and H26 (`Staccato`). Its other rules port the mechanical checks of the ISO 24495 text audit (GaZmagik/iso-24495 v0.7.0) to Vale. For the I rules they cover I1 (`SentenceLength`, `SentenceAverage`), I2 (`ParagraphLength`), I3 (`PlainWords`, `WordyPhrases`), I7 (`DoubleNegatives`), and I14 (`HeadingDepth`). For the R and S rules they cover R6 (`FillerOpenings`), S2 (`HeadingLength`), S3 (`HeadingSkip`), S5 (`ProseEnumeration`), S6 (`TableHeader`), S9 (`LinkText`), and S10 (`ImageAlt`).
+The `TechWriter` AI-tell rules cover H1 (`Reversal`), H3 (`Teasers`), H5 (`DashSubstitutes`), H7 (`Significance`), H8 (`AIVocabulary`), H10 (`ChatbotArtifacts`), H14 (`SourceDisclaimers`), H19 (`NotabilityClaims`), H21 (`CurlyQuotes`), H25 (`NeedlessCount`), and H26 (`Staccato`). Its other rules port the mechanical checks of the ISO 24495 text audit (GaZmagik/iso-24495 v0.7.0) to Vale. For the I rules they cover I1 (`SentenceLength`, `SentenceAverage`), I2 (`ParagraphLength`), I3 (`PlainWords`, `WordyPhrases`), I7 (`DoubleNegatives`), and I14 (`HeadingDepth`). For the R and S rules they cover R6 (`FillerOpenings`), S2 (`HeadingLength`), S3 (`HeadingSkip`), S5 (`ProseEnumeration`), S6 (`TableHeader`), S9 (`LinkText`), S10 (`ImageAlt`), and S14 (`FalsePrecision`).
 
 ```ini
 StylesPath = styles
@@ -370,6 +371,7 @@ Each mapped check is exact or a candidate. An exact alert is a finding unless it
 | TechWriter.TableHeader | S6 | exact |
 | TechWriter.LinkText | S9 | exact |
 | TechWriter.ImageAlt | S10 | exact |
+| TechWriter.FalsePrecision | S14 | candidate (keep limits, thresholds, versions, and small counts that define the scope) |
 | Google.Acronyms | W3 | candidate (it checks 3 to 5 capitals; a term the reader knows needs no definition) |
 
 Every other check is unmapped and dropped. That includes the remaining ai-tells checks (the `Figurative*` and `*Metaphors` families, `ColonUsage`) and the Google checks this skill has no rule for (`Parens`, `Quotes`, `Colons`, `Ellipses`). This skill uses colons to introduce code and lists, so a colon alert is never a finding.

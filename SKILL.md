@@ -120,6 +120,7 @@ See [references/voice-and-words.md](references/voice-and-words.md) when you audi
 - **Depth and contents.** Use at most 3 heading levels below the title, so `####` is the deepest. A document with 6 or more sections gets a table of contents worded exactly like its headings.
 - **List introductions.** Three or more parallel items become a list. A list needs an introductory sentence ending in a colon, and every item in the same grammatical form. Number a list only when order matters.
 - **Bold lead-ins.** Start each explanatory bullet with 2 to 4 bold words that name the item, then explain it. Use no other bold in prose except UI element names.
+- **Rounded figures.** A title or headline claim gives a share to the nearest 5% with "about", or a magnitude to 2 significant figures, computed from the data: "316 of 1,088 instances lack SSM data" becomes "About 30% of the EC2 instances lack SSM data". Limits, thresholds, versions, dates, and counts that define the scope stay exact.
 - **Description lists.** Term and definition pairs read better as a description list than as a two-column table.
 - **Tables.** Give every table a header row and an introductory sentence, with no merged or empty cells. Screen readers depend on it.
 - **Notices.** Note means useful but optional, Caution means proceed carefully, and Warning means harm or irreversible loss. Do not stack them; one per section is a practical ceiling (inferred).
